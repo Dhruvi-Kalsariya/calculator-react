@@ -1,123 +1,45 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./Calculator.css";
 
-const Calculator = () => {
-  const [result, setResult] = useState("");
+function Calculator() {
+  const [value, setValue] = useState("0");
 
-  const handleClick = (value) => {
-    if (value === "=") {
+  const press = (btn) => {
+    if (btn === "AC") {
+      setValue("0");
+    } else if (btn === "=") {
       try {
-        const expression = result
-          .replace(/×/g, "*")
-          .replace(/÷/g, "/");
-
-        setResult(eval(expression).toString());
+        setValue(eval(value).toString());
       } catch {
-        setResult("Error");
-      }
-    } else if (value === "AC") {
-      setResult("");
-    } else if (value === "⌫") {
-      setResult(result.slice(0, -1));
-    } else if (value === "%") {
-      try {
-        setResult((parseFloat(result) / 100).toString());
-      } catch {
-        setResult("Error");
+        setValue("Error");
       }
     } else {
-      setResult(result + value);
+      if (value === "0") {
+        setValue(btn);
+      } else {
+        setValue(value + btn);
+      }
     }
   };
 
-  useEffect(() => {
-    const keyboard = (e) => {
-      const key = e.key;
-
-      if ("0123456789+-*/.%".includes(key)) {
-        setResult((prev) => prev + key);
-      }
-
-      if (key === "Enter") {
-        try {
-          setResult(eval(result).toString());
-        } catch {
-          setResult("Error");
-        }
-      }
-
-      if (key === "Backspace") {
-        setResult((prev) => prev.slice(0, -1));
-      }
-
-      if (key === "Escape") {
-        setResult("");
-      }
-    };
-
-    window.addEventListener("keydown", keyboard);
-
-    return () => window.removeEventListener("keydown", keyboard);
-  }, [result]);
-
-  const buttons = [
-    "AC",
-    "⌫",
-    "%",
-    "÷",
-    "7",
-    "8",
-    "9",
-    "×",
-    "4",
-    "5",
-    "6",
-    "-",
-    "1",
-    "2",
-    "3",
-    "+",
-    "0",
-    ".",
-    "=",
-  ];
-
   return (
     <div className="calculator">
-
-      <input
-        type="text"
-        value={result}
-        readOnly
-        className="display"
-      />
+      <input className="display" value={value} readOnly />
 
       <div className="buttons">
-
-        {buttons.map((btn, index) => (
-
-          <button
-            key={index}
-            onClick={() => handleClick(btn)}
-            className={
-              btn === "="
-                ? "equal"
-                : ["+", "-", "×", "÷", "%"].includes(btn)
-                ? "operator"
-                : btn === "AC"
-                ? "clear"
-                : ""
-            }
-          >
-            {btn}
+        {[
+          "7","8","9","/",
+          "4","5","6","*",
+          "1","2","3","-",
+          "0",".","=","+","AC"
+        ].map((btn) => (
+          <button key={btn} onClick={() => press(btn)}>
+            {btn === "*" ? "×" : btn === "/" ? "÷" : btn}
           </button>
-
         ))}
-
       </div>
-
     </div>
   );
-};
+}
 
 export default Calculator;
