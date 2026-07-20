@@ -6,8 +6,6 @@ A simple and responsive Calculator application built using **React.js**, **HTML*
 
 ## 📸 Project Screenshot
 
-> Add your project screenshot here.
-
 ![Calculator Screenshot](./screenshot.png)
 
 ---
