@@ -4,6 +4,14 @@ A simple and responsive Calculator application built using **React.js**, **HTML*
 
 ---
 
+## 📸 Project Screenshot
+
+> Add your project screenshot here.
+
+![Calculator Screenshot](screenshot.png)
+
+---
+
 ## 📌 Features
 
 - ➕ Addition
@@ -25,14 +33,6 @@ A simple and responsive Calculator application built using **React.js**, **HTML*
 - HTML5
 - CSS3
 - JavaScript (ES6)
-
----
-
-## 📸 Project Screenshot
-
-> Add your project screenshot here.
-
-![Calculator Screenshot](./screenshot.png)
 
 ---
 
